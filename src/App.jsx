@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/home";
-import SignUp from "./components/signup";
 import Login from "./components/login";
-import CashIn from "./components/cashin";
-import CashOut from "./components/cashout";
+import SignUp from "./components/signup";
+// import Home from "./components/home";
+// import CashIn from "./components/cashin";
+// import CashOut from "./components/cashout";
 import UserContext from "./components/usercontext";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Login />}></Route>
                     <Route path="/cadastro" element={<SignUp />}></Route>
-                    <Route path="/home" element={<Home />}></Route>
+                    {/* <Route path="/home" element={<Home />}></Route>
                     <Route
                         path="/nova-transacao/entrada"
                         element={<CashIn />}
@@ -24,7 +24,7 @@ function App() {
                     <Route
                         path="/nova-transacao/saida"
                         element={<CashOut />}
-                    ></Route>
+                    ></Route> */}
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
