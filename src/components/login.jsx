@@ -80,6 +80,7 @@ export default function Login() {
                     value={userEmail}
                     onChange={(event) => setEmail(event.target.value)}
                     disabled={loading}
+                    data-test="email"
                 />
                 <input
                     type="password"
@@ -87,8 +88,13 @@ export default function Login() {
                     value={userPassword}
                     onChange={(event) => setPassword(event.target.value)}
                     disabled={loading}
+                    data-test="password"
                 />
-                <button onClick={() => setLoading(true)} disabled={loading}>
+                <button
+                    onClick={() => setLoading(true)}
+                    disabled={loading}
+                    data-test="sign-in-submit"
+                >
                     {loading ? `...` : `Entrar`}
                 </button>
                 <Link to={`/cadastro`} className="logintext">

@@ -69,6 +69,7 @@ export default function SignUp() {
                     value={signupName}
                     onChange={(event) => setName(event.target.value)}
                     disabled={loading}
+                    data-test="name"
                 />
                 <input
                     type="text"
@@ -77,6 +78,7 @@ export default function SignUp() {
                     value={signupEmail}
                     onChange={(event) => setEmail(event.target.value)}
                     disabled={loading}
+                    data-test="email"
                 />
                 <input
                     type="password"
@@ -85,6 +87,7 @@ export default function SignUp() {
                     value={signupPassword}
                     onChange={(event) => setPassword(event.target.value)}
                     disabled={loading}
+                    data-test="password"
                 />
                 <input
                     type="password"
@@ -93,8 +96,13 @@ export default function SignUp() {
                     value={confirmPassword}
                     onChange={(event) => setConfirm(event.target.value)}
                     disabled={loading}
+                    data-test="conf-password"
                 />
-                <button onClick={sendSignup} disabled={loading}>
+                <button
+                    onClick={sendSignup}
+                    disabled={loading}
+                    data-test="sign-up-submit"
+                >
                     {loading ? `...` : `Cadastrar`}
                 </button>
                 <Link to={`/`}>Já tem uma conta? Entre agora!</Link>
