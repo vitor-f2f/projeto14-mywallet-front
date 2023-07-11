@@ -53,12 +53,15 @@ export default function Login() {
                 console.log(r);
                 setUserData({
                     userToken: r.token,
+                    userName: r.name,
                 });
                 const loginData = {
                     savedEmail: userEmail,
                     savedPassword: userPassword,
                 };
                 localStorage.setItem("loginData", JSON.stringify(loginData));
+                localStorage.setItem("userToken", r.token);
+                localStorage.setItem("userName", r.name);
                 navigate("/home");
             })
             .catch((err) => {
@@ -112,7 +115,6 @@ const LoginContainer = styled.div`
         line-height: 50px;
         color: white;
     }
-    padding: 0 38px;
     display: flex;
     flex-direction: column;
     max-width: 412px;
@@ -124,7 +126,7 @@ const LoginContainer = styled.div`
 `;
 
 const LoginForm = styled.div`
-    padding-top: 100px;
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     width: 300px;

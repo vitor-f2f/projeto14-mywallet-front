@@ -120,7 +120,6 @@ const SignupContainer = styled.div`
         color: white;
     }
     font-size: 30px;
-    padding: 0 38px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -132,6 +131,7 @@ const SignupContainer = styled.div`
 `;
 
 const SignupForm = styled.div`
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     width: 300px;
