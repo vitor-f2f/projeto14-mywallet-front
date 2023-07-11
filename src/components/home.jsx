@@ -17,6 +17,11 @@ export default function Home() {
     const [userTransactions, setTransactions] = useState([]);
     const [userBalance, setUserBalance] = useState(null);
 
+    function formatValue(n) {
+        const res = Math.abs(n).toFixed(2).replace(".", ",");
+        return res;
+    }
+
     function requestData() {
         const promise = axios.get(
             `${import.meta.env.VITE_API_URL}/account`,
@@ -26,6 +31,7 @@ export default function Home() {
             .then((res) => {
                 setTransactions(res.data.transactions);
                 setUserBalance(res.data.balance);
+                console.log(res.data);
             })
             .catch((error) => {
                 alert(`Erro: ${error}`);
@@ -59,8 +65,8 @@ export default function Home() {
             <TransactionList>
                 <ul>
                     {userTransactions.length > 0 ? (
-                        userTransactions.map((t) => (
-                            <Item key={t.id}>
+                        userTransactions.map((t, index) => (
+                            <Item key={index}>
                                 <div>
                                     <span>{t.date}</span>
                                     <strong data-test="registry-name">
@@ -75,7 +81,7 @@ export default function Home() {
                                     }
                                     data-test="registry-amount"
                                 >
-                                    {t.value}
+                                    {formatValue(t.value)}
                                 </Value>
                             </Item>
                         ))
@@ -92,7 +98,7 @@ export default function Home() {
                             color={userBalance >= 0 ? "positivo" : "negativo"}
                             data-test="total-amount"
                         >
-                            {userBalance}
+                            {formatValue(userBalance)}
                         </Value>
                     </article>
                 ) : (

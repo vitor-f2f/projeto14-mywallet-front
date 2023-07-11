@@ -3,41 +3,49 @@ import styled from "styled-components";
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "./usercontext.js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function TransactionsPage() {
+    const navigate = useNavigate();
     const { tipo } = useParams();
-
     const userToken = localStorage.getItem("userToken");
+    const tokenObj = {
+        headers: { Authorization: userToken },
+    };
+
     const type = tipo === "entrada" ? "Entrada" : "Saída";
 
     const [loading, setLoading] = useState(false);
 
     const [newvalue, setValue] = useState("");
     const [newdescription, setDescription] = useState("");
-
-    const sendTransaction = () => {
+    let transactionObj = {
+        value: Number(""),
+        description: "",
+    };
+    const sendTransaction = (event) => {
+        event.preventDefault();
         if (newvalue === "" || newdescription === "") {
             alert("Preencha todos os dados para prosseguir.");
             setLoading(false);
             return;
         }
         setLoading(true);
-        const transactionObj = {
-            value: newvalue,
-            description: newdescription,
-        };
+        const numValue = Number(newvalue.replace(",", "."));
+        transactionObj.value = numValue;
+        transactionObj.description = newdescription;
+
         console.log("log obj", transactionObj);
         const promise = axios.post(
             `${import.meta.env.VITE_API_URL}/transaction/${tipo}`,
             transactionObj,
-            {
-                headers: { Authorization: userToken },
-            }
+            tokenObj
         );
         promise
             .then((res) => {
                 const r = res.data;
                 console.log(r);
+                navigate("/home");
             })
             .catch((err) => {
                 console.log(err);
